@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:image_fade/image_fade.dart';
 import 'package:internship/provider/imageProvider.dart';
 import 'package:internship/theme.dart';
 import 'package:provider/provider.dart';
@@ -17,9 +18,6 @@ class _AuthScreenState extends State<AuthScreen>
 
   TextEditingController _email = new TextEditingController();
   TextEditingController _pass = new TextEditingController();
-  final _formKey = new GlobalKey<FormState>();
-  AnimationController controller;
-  Animation<double> _fadeInFadeOut;
   double _loginHeight = 0;
   double _registerHeight = 0;
 
@@ -36,27 +34,12 @@ class _AuthScreenState extends State<AuthScreen>
   void initState() {
     final List<AssetImage> _images =
         Provider.of<ProvideImage>(context, listen: false).getImages;
-    controller = AnimationController(
-        duration: const Duration(milliseconds: 1500), vsync: this);
-    _fadeInFadeOut = Tween<double>(begin: 0.1, end: 1.0).animate(controller);
-
-    controller.addStatusListener(
-      (status) {
-        if (status == AnimationStatus.completed) {
-          controller.reverse();
-        } else if (status == AnimationStatus.dismissed) {
-          controller.forward();
-        }
-      },
-    );
-    // controller.forward();
 
     const time = const Duration(seconds: 3);
     _timer = Timer.periodic(
         time,
         (Timer timer) => {
               setState(() {
-                controller.forward();
                 _pos = (_pos + 1) % _images.length;
               })
             });
@@ -99,12 +82,9 @@ class _AuthScreenState extends State<AuthScreen>
             Container(
               width: double.infinity,
               height: windowHeight / 2.7,
-              child: FadeTransition(
-                opacity: _fadeInFadeOut,
-                child: Image(
-                  image: _images.elementAt(_pos),
-                  fit: BoxFit.cover,
-                ),
+              child: ImageFade(
+                image: _images[_pos],
+                fit: BoxFit.cover,
               ),
             ),
           ],
@@ -154,7 +134,7 @@ class _AuthScreenState extends State<AuthScreen>
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: windowHeight * 0.03,
               ),
               TextFormField(
                 autocorrect: false,
@@ -167,7 +147,7 @@ class _AuthScreenState extends State<AuthScreen>
                 ),
               ),
               SizedBox(
-                height: 60,
+                height: windowHeight * 0.05,
               ),
               Container(
                 width: double.infinity,
@@ -180,7 +160,7 @@ class _AuthScreenState extends State<AuthScreen>
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: windowHeight * 0.01,
               ),
               TextButton(
                 child: Text('Forget password'),
@@ -201,13 +181,12 @@ class _AuthScreenState extends State<AuthScreen>
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: windowHeight * 0.04,
               ),
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    animationDuration: Duration(seconds: 0),
                     backgroundColor: MaterialStateProperty.all<Color>(
                         AppTheme.registerButton),
                   ),
