@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
+          fontFamily: 'Montserrat',
           textTheme: TextTheme(
             headline1: TextStyle(
               fontSize: 25,
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: TextButton.styleFrom(
+              elevation: 0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
               primary: Colors.white,

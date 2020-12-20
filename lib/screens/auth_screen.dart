@@ -14,7 +14,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen>
     with SingleTickerProviderStateMixin {
-  int _pageState = 1;
+  int _pageState = 0;
 
   TextEditingController _email = new TextEditingController();
   TextEditingController _pass = new TextEditingController();
@@ -29,13 +29,20 @@ class _AuthScreenState extends State<AuthScreen>
 
   int _pos = 0;
   Timer _timer;
+  Color con = AppTheme.connectButton;
+  Color reg = AppTheme.registerButton;
 
   @override
   void initState() {
+    Timer(Duration(seconds: 1), () {
+      setState(() {
+        _pageState = 1;
+      });
+    });
     final List<AssetImage> _images =
         Provider.of<ProvideImage>(context, listen: false).getImages;
 
-    const time = const Duration(seconds: 3);
+    const time = const Duration(seconds: 5);
     _timer = Timer.periodic(
         time,
         (Timer timer) => {
@@ -54,9 +61,6 @@ class _AuthScreenState extends State<AuthScreen>
     windowHeight = MediaQuery.of(context).size.height;
     windowWidth = MediaQuery.of(context).size.width;
 
-    _loginHeight = 2 * windowHeight / 3;
-    _registerHeight = 2 * windowHeight / 3;
-
     switch (_pageState) {
       case 1:
         _loginYOffset = windowHeight / 3;
@@ -71,6 +75,11 @@ class _AuthScreenState extends State<AuthScreen>
         _registerYOffset = windowHeight / 3;
         _registerHeight = 2 * windowHeight / 3;
         break;
+      default:
+        _loginYOffset = windowHeight;
+        _loginHeight = 0;
+        _registerYOffset = windowHeight;
+        _registerHeight = 0;
     }
 
     return Stack(
@@ -83,6 +92,7 @@ class _AuthScreenState extends State<AuthScreen>
               width: double.infinity,
               height: windowHeight / 2.7,
               child: ImageFade(
+                fadeDuration: Duration(seconds: 1),
                 image: _images[_pos],
                 fit: BoxFit.cover,
               ),
@@ -149,14 +159,25 @@ class _AuthScreenState extends State<AuthScreen>
               SizedBox(
                 height: windowHeight * 0.05,
               ),
-              Container(
+              AnimatedContainer(
+                duration: Duration(milliseconds: 1000),
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          AppTheme.connectButton)),
+                      backgroundColor: MaterialStateProperty.all<Color>(con)),
                   onPressed: () {},
-                  child: Text('CONNECT'),
+                  child: GestureDetector(
+                      onTapUp: (_) {
+                        setState(() {
+                          con = AppTheme.connectButton;
+                        });
+                      },
+                      onTapDown: (_) {
+                        setState(() {
+                          con = AppTheme.onLongPressColor;
+                        });
+                      },
+                      child: Text('CONNECT')),
                 ),
               ),
               SizedBox(
@@ -186,15 +207,15 @@ class _AuthScreenState extends State<AuthScreen>
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        AppTheme.registerButton),
-                  ),
-                  onPressed: () {
-                    _pageState = 2;
-                  },
-                  child: Text('REGISTER'),
-                ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(reg),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _pageState = 2;
+                      });
+                    },
+                    child: Text('REGISTER')),
               ),
             ],
           ),
@@ -213,16 +234,14 @@ class _AuthScreenState extends State<AuthScreen>
             width: double.infinity,
             height: 100,
             child: ElevatedButton(
-              onPressed: () {
-                _pageState = 1;
-              },
-              child: Text(
-                'BACK',
-                style: AppTheme.textTheme.headline1,
-              ),
-            ),
+                onPressed: () {
+                  setState(() {
+                    _pageState = 1;
+                  });
+                },
+                child: Text('BACK')),
           ),
-        )
+        ),
       ],
     );
   }

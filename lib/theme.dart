@@ -19,6 +19,7 @@ class AppTheme {
   static const Color spacer = Color(0xFFF2F2F2);
   static const Color registerButton = Color(0xFFD81B60);
   static const Color connectButton = Color(0xFF40C4FF);
+  static const Color onLongPressColor = Color(0xFFE040FB);
   static const String fontName = 'WorkSans';
 
   static const TextTheme textTheme = TextTheme(
