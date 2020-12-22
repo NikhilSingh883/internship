@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:internship/provider/imageProvider.dart';
+import 'package:internship/size_config.dart';
 import 'package:internship/theme.dart';
 import 'package:internship/widgets/auth.dart';
 import 'package:internship/widgets/register.dart';
@@ -61,22 +62,22 @@ class _AuthScreenState extends State<AuthScreen>
 
     switch (_pageState) {
       case 1:
-        _loginYOffset = windowHeight / 3;
-        _loginHeight = 2 * windowHeight / 3;
-        _registerYOffset = windowHeight;
+        _loginYOffset = SizeConfig.heightMultiplier * 33;
+        _loginHeight = 2 * SizeConfig.heightMultiplier * 33;
+        _registerYOffset = SizeConfig.heightMultiplier * 100;
         _registerHeight = 0;
         break;
       case 2:
-        _registerHeight = 2 * windowHeight / 3;
+        _registerHeight = 2 * SizeConfig.heightMultiplier * 33;
         _loginYOffset = windowHeight;
         _loginHeight = 0;
-        _registerYOffset = windowHeight / 3;
-        _registerHeight = 2 * windowHeight / 3;
+        _registerYOffset = SizeConfig.heightMultiplier * 33;
+        _registerHeight = 2 * SizeConfig.heightMultiplier * 33;
         break;
       default:
-        _loginYOffset = windowHeight;
+        _loginYOffset = SizeConfig.heightMultiplier * 100;
         _loginHeight = 0;
-        _registerYOffset = windowHeight;
+        _registerYOffset = SizeConfig.heightMultiplier * 100;
         _registerHeight = 0;
     }
 
@@ -90,7 +91,7 @@ class _AuthScreenState extends State<AuthScreen>
               builder: (context, photos, child) {
                 return Container(
                   width: double.infinity,
-                  height: windowHeight / 2.7,
+                  height: SizeConfig.heightMultiplier * 36,
                   child: ImageFade(
                     fadeDuration: Duration(seconds: 1),
                     image: photos.getPhoto,
@@ -102,15 +103,11 @@ class _AuthScreenState extends State<AuthScreen>
           ],
         ),
         Positioned(
-          top: windowHeight / 3.5,
-          left: windowWidth / 20,
-          child: AnimatedContainer(
-            duration: Duration(seconds: 2),
-            child: Text(
-              _pageState == 1 ? 'Connection' : 'Connect',
-              style: TextStyle(
-                  fontSize: windowHeight * 0.025, color: Colors.white),
-            ),
+          top: SizeConfig.heightMultiplier * 29,
+          left: SizeConfig.widthMultiplier * 8,
+          child: Text(
+            _pageState == 1 ? 'Connection' : 'Connect',
+            style: AppTheme.textTheme.caption,
           ),
         ),
         AuthModal(_loginYOffset, changePage),

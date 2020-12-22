@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship/size_config.dart';
 import 'package:internship/theme.dart';
 
 class AuthModal extends StatefulWidget {
@@ -17,21 +18,21 @@ class _AuthModalState extends State<AuthModal> {
   Color reg = AppTheme.registerButton;
   @override
   Widget build(BuildContext context) {
-    final windowHeight = MediaQuery.of(context).size.height;
-    final windowWidth = MediaQuery.of(context).size.width;
-
     return AnimatedContainer(
       padding: EdgeInsets.symmetric(
-          horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
-      height: 2 * windowHeight / 3,
+          horizontal: SizeConfig.heightMultiplier * 3,
+          vertical: SizeConfig.widthMultiplier * 7),
+      height: SizeConfig.heightMultiplier * 66,
       width: double.infinity,
       curve: Curves.linear,
       duration: Duration(milliseconds: 1000),
       transform: Matrix4.translationValues(0, widget._loginYOffset, 1),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(5.2 * SizeConfig.widthMultiplier),
+            topRight: Radius.circular(5.2 * SizeConfig.widthMultiplier)),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -39,10 +40,7 @@ class _AuthModalState extends State<AuthModal> {
           Container(
             child: Text(
               'AUTHENTICATION',
-              style: TextStyle(
-                  fontSize: windowHeight * 0.035,
-                  color: Colors.redAccent,
-                  fontWeight: FontWeight.w600),
+              style: AppTheme.textTheme.headline5,
             ),
           ),
           TextFormField(
@@ -54,12 +52,11 @@ class _AuthModalState extends State<AuthModal> {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               hintText: 'Email',
-              hintStyle:
-                  TextStyle(fontWeight: FontWeight.w600, color: Colors.grey),
+              hintStyle: AppTheme.hintStyle,
             ),
           ),
           SizedBox(
-            height: windowHeight * 0.03,
+            height: SizeConfig.heightMultiplier * 1.5,
           ),
           TextFormField(
             autocorrect: false,
@@ -68,12 +65,11 @@ class _AuthModalState extends State<AuthModal> {
             obscureText: true,
             decoration: InputDecoration(
               hintText: 'Password',
-              hintStyle:
-                  TextStyle(fontWeight: FontWeight.w600, color: Colors.grey),
+              hintStyle: AppTheme.hintStyle,
             ),
           ),
           SizedBox(
-            height: windowHeight * 0.05,
+            height: SizeConfig.heightMultiplier * 6,
           ),
           AnimatedContainer(
             duration: Duration(milliseconds: 1000),
@@ -95,17 +91,17 @@ class _AuthModalState extends State<AuthModal> {
                   },
                   child: Text(
                     'CONNECT',
-                    style: TextStyle(fontSize: windowHeight * 0.025),
+                    style: AppTheme.textTheme.headline1,
                   )),
             ),
           ),
           SizedBox(
-            height: windowHeight * 0.01,
+            height: SizeConfig.heightMultiplier * 1.5,
           ),
           TextButton(
             child: Text(
               'Forget password',
-              style: TextStyle(fontSize: windowHeight * 0.02),
+              // style: AppTheme.subtitle,
             ),
             onPressed: () {
               widget.changePage(2);
@@ -115,14 +111,11 @@ class _AuthModalState extends State<AuthModal> {
           Container(
             child: Text(
               '-OR-',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                  fontSize: windowHeight * 0.03),
+              style: AppTheme.textTheme.headline4,
             ),
           ),
           SizedBox(
-            height: windowHeight * 0.04,
+            height: SizeConfig.heightMultiplier * 4,
           ),
           Container(
             width: double.infinity,
@@ -135,7 +128,7 @@ class _AuthModalState extends State<AuthModal> {
               },
               child: Text(
                 'REGISTER',
-                style: TextStyle(fontSize: windowHeight * 0.025),
+                style: AppTheme.textTheme.headline1,
               ),
             ),
           ),

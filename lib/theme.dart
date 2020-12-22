@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship/size_config.dart';
 
 class AppTheme {
   AppTheme._();
@@ -22,7 +23,7 @@ class AppTheme {
   static const Color onLongPressColor = Color(0xFFE040FB);
   static const String fontName = 'WorkSans';
 
-  static const TextTheme textTheme = TextTheme(
+  static final TextTheme textTheme = TextTheme(
     headline4: display1,
     headline5: headline,
     headline6: title,
@@ -32,52 +33,51 @@ class AppTheme {
     caption: caption,
   );
 
-  static const TextStyle display1 = TextStyle(
+  static final TextStyle display1 = TextStyle(
     // h4 -> display1
-    fontFamily: fontName,
-    fontWeight: FontWeight.bold,
-    fontSize: 36,
-    letterSpacing: 0.4,
-    height: 0.9,
-    color: darkerText,
+    fontWeight: FontWeight.w400,
+    fontSize: SizeConfig.heightMultiplier,
+    letterSpacing: SizeConfig.widthMultiplier / 10,
+    height: SizeConfig.heightMultiplier / 10,
+    color: Colors.grey,
   );
 
-  static const TextStyle headline = TextStyle(
+  static final TextStyle headline = TextStyle(
     // h5 -> headline
     fontWeight: FontWeight.w600,
-    fontSize: 40,
-    letterSpacing: 0.5,
+    fontSize: SizeConfig.heightMultiplier * 3.1,
+    letterSpacing: SizeConfig.widthMultiplier / 10,
     color: Colors.redAccent,
   );
 
-  static const TextStyle title = TextStyle(
+  static final TextStyle title = TextStyle(
     // h6 -> title
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
-    fontSize: 16,
-    letterSpacing: 0.18,
+    fontSize: SizeConfig.heightMultiplier * 1.5,
+    letterSpacing: SizeConfig.widthMultiplier * 1,
     color: darkerText,
   );
 
-  static const TextStyle subtitle = TextStyle(
+  static final TextStyle subtitle = TextStyle(
     // subtitle2 -> subtitle
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
-    fontSize: 14,
+    fontSize: SizeConfig.heightMultiplier * 1.2,
     letterSpacing: -0.04,
-    color: darkText,
+    color: Colors.green,
   );
 
-  static const TextStyle body2 = TextStyle(
+  static final TextStyle body2 = TextStyle(
     // body1 -> body2
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
-    fontSize: 14,
-    letterSpacing: 0.2,
+    fontSize: SizeConfig.heightMultiplier * 1.3,
+    letterSpacing: SizeConfig.widthMultiplier / 10,
     color: darkText,
   );
 
-  static const TextStyle body1 = TextStyle(
+  static final TextStyle body1 = TextStyle(
     // body2 -> body1
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
@@ -86,15 +86,15 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle caption = TextStyle(
+  static final TextStyle caption = TextStyle(
     // Caption -> caption
     fontWeight: FontWeight.w300,
-    fontSize: 30,
-    letterSpacing: 0.5,
+    fontSize: SizeConfig.heightMultiplier * 2.8,
+    letterSpacing: SizeConfig.widthMultiplier / 10,
     color: Colors.white, // was lightText
   );
 
-  static const TextStyle hintStyle = TextStyle(
+  static final TextStyle hintStyle = TextStyle(
     fontWeight: FontWeight.w600,
     color: Colors.grey,
   );
