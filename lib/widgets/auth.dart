@@ -44,6 +44,7 @@ class _AuthModalState extends State<AuthModal> {
             ),
           ),
           TextFormField(
+            style: AppTheme.inputStyle,
             controller: _email,
             autocorrect: false,
             textCapitalization: TextCapitalization.none,
@@ -60,6 +61,7 @@ class _AuthModalState extends State<AuthModal> {
           ),
           TextFormField(
             autocorrect: false,
+            style: AppTheme.inputStyle,
             key: ValueKey('password'),
             controller: _pass,
             obscureText: true,

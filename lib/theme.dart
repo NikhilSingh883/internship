@@ -36,7 +36,7 @@ class AppTheme {
   static final TextStyle display1 = TextStyle(
     // h4 -> display1
     fontWeight: FontWeight.w400,
-    fontSize: SizeConfig.heightMultiplier,
+    fontSize: SizeConfig.heightMultiplier * 3,
     letterSpacing: SizeConfig.widthMultiplier / 10,
     height: SizeConfig.heightMultiplier / 10,
     color: Colors.grey,
@@ -95,7 +95,12 @@ class AppTheme {
   );
 
   static final TextStyle hintStyle = TextStyle(
-    fontWeight: FontWeight.w600,
-    color: Colors.grey,
-  );
+      fontWeight: FontWeight.w600,
+      color: Colors.grey,
+      fontSize: SizeConfig.heightMultiplier * 2);
+
+  static final TextStyle inputStyle = TextStyle(
+      fontWeight: FontWeight.w400,
+      color: Colors.grey,
+      fontSize: SizeConfig.heightMultiplier * 2);
 }

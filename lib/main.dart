@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:internship/redux/reducers.dart';
 import 'package:internship/screens/auth_screen.dart';
@@ -10,11 +9,6 @@ import 'package:internship/provider/imageProvider.dart';
 import 'package:redux/redux.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
   runApp(MyApp());
 }
 
@@ -55,7 +49,8 @@ class MyApp extends StatelessWidget {
                     style: TextButton.styleFrom(
                       elevation: 0,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
+                          borderRadius: BorderRadius.circular(
+                              SizeConfig.widthMultiplier * 10)),
                       primary: Colors.white,
                       padding: EdgeInsets.symmetric(
                         vertical: 2 * SizeConfig.heightMultiplier,
