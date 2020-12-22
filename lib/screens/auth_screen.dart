@@ -102,18 +102,19 @@ class _AuthScreenState extends State<AuthScreen>
           ],
         ),
         Positioned(
-          top: windowHeight / 3.3,
+          top: windowHeight / 3.5,
           left: windowWidth / 20,
           child: AnimatedContainer(
             duration: Duration(seconds: 2),
             child: Text(
               _pageState == 1 ? 'Connection' : 'Connect',
-              style: AppTheme.textTheme.caption,
+              style: TextStyle(
+                  fontSize: windowHeight * 0.025, color: Colors.white),
             ),
           ),
         ),
-        AuthModal(_pageState, _loginYOffset, changePage),
-        RegisterModal(_pageState, _registerYOffset, changePage),
+        AuthModal(_loginYOffset, changePage),
+        RegisterModal(_registerYOffset, changePage),
       ],
     );
   }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RegisterModal extends StatefulWidget {
-  int _pageState;
   double _registerYOffset;
   Function changePage;
-  RegisterModal(this._pageState, this._registerYOffset, this.changePage);
+  RegisterModal(this._registerYOffset, this.changePage);
   @override
   _RegisterModalState createState() => _RegisterModalState();
 }
