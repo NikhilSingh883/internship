@@ -22,7 +22,8 @@ class _AuthModalState extends State<AuthModal> {
     final windowWidth = MediaQuery.of(context).size.width;
 
     return AnimatedContainer(
-      padding: EdgeInsets.all(32),
+      padding: EdgeInsets.symmetric(
+          horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
       height: 2 * windowHeight / 3,
       width: double.infinity,
       curve: Curves.linear,
