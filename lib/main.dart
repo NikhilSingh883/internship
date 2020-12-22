@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:internship/redux/reducers.dart';
 import 'package:internship/screens/auth_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:internship/provider/imageProvider.dart';
+import 'package:redux/redux.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +17,15 @@ void main() {
   runApp(MyApp());
 }
 
+@immutable
+class AppState {
+  final pos;
+  AppState(this.pos);
+}
+
 class MyApp extends StatelessWidget {
+  final store = new Store(reducer, initialState: new AppState(0));
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -64,12 +75,10 @@ class MyApp extends StatelessWidget {
               ButtonTheme.of(context).copyWith(splashColor: Colors.amber),
         ),
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Container(
-            child: AuthScreen(),
-          ),
-        ),
+        home: StoreProvider(
+            store: store,
+            child:
+                Scaffold(resizeToAvoidBottomInset: false, body: AuthScreen())),
       ),
     );
   }

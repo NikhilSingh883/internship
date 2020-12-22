@@ -29,7 +29,6 @@ class _AuthScreenState extends State<AuthScreen>
   double windowWidth = 0;
 
   int _pos = 0;
-  Timer _timer;
 
   Color con = AppTheme.connectButton;
   Color reg = AppTheme.registerButton;
@@ -47,25 +46,16 @@ class _AuthScreenState extends State<AuthScreen>
         _pageState = 1;
       });
     });
-    final List<AssetImage> _images =
-        Provider.of<ProvideImage>(context, listen: false).getImages;
 
-    const time = const Duration(seconds: 5);
-    _timer = Timer.periodic(
-        time,
-        (Timer timer) => {
-              setState(() {
-                _pos = (_pos + 1) % _images.length;
-              })
-            });
+    Timer.periodic(Duration(seconds: 5), (timer) {
+      Provider.of<ProvideImage>(context, listen: false).changePhoto();
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<AssetImage> _images =
-        Provider.of<ProvideImage>(context).getImages;
-
     windowHeight = MediaQuery.of(context).size.height;
     windowWidth = MediaQuery.of(context).size.width;
 
@@ -96,14 +86,18 @@ class _AuthScreenState extends State<AuthScreen>
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              height: windowHeight / 2.7,
-              child: ImageFade(
-                fadeDuration: Duration(seconds: 1),
-                image: _images[_pos],
-                fit: BoxFit.cover,
-              ),
+            Consumer<ProvideImage>(
+              builder: (context, photos, child) {
+                return Container(
+                  width: double.infinity,
+                  height: windowHeight / 2.7,
+                  child: ImageFade(
+                    fadeDuration: Duration(seconds: 1),
+                    image: photos.getPhoto,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
             ),
           ],
         ),
